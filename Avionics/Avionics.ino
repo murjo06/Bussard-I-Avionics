@@ -10,12 +10,12 @@
 
 void setup() {
     Wire.begin();
-    Serial.begin(9600);
+    Serial.begin(115200);
     initAccelerometer();
     initAltimeter();
     //initTiltSwitch();
     //initThermometer();
-    //initStorage();
+    initStorage();
     initMagnometer();
 }
 
@@ -25,40 +25,8 @@ void loop() {
     struct accelerometerData accelerometerValues = getAccelerometerData();
     struct compassData magnetometerValues = getMagnometerData();
 
-    Serial.println("Altimeter:");
-    Serial.print("Pressure: ");
-    Serial.print(altimeterValues.pressure);
-    Serial.print(" Altitude: ");
-    Serial.print(altimeterValues.altitude);
-    Serial.print(" Humidity: ");
-    Serial.print(altimeterValues.humidity);
-    Serial.print(" Temperature: ");
-    Serial.println(altimeterValues.temperature);
-    Serial.println();
-    
-    Serial.println("Accelerometer:");
-    Serial.print("X: ");
-    Serial.print(accelerometerValues.accelerationX);
-    Serial.print(" Y: ");
-    Serial.print(accelerometerValues.accelerationY);
-    Serial.print(" Z: ");
-    Serial.print(accelerometerValues.accelerationZ);
-    Serial.print(" Pitch: ");
-    Serial.print(accelerometerValues.pitch);
-    Serial.print(" Yaw: ");
-    Serial.print(accelerometerValues.yaw);
-    Serial.print(" Roll: ");
-    Serial.println(accelerometerValues.roll);
-    Serial.println();
-
-    Serial.println("Magnetometer:");
-    Serial.print("X: ");
-    Serial.print(magnetometerValues.x);
-    Serial.print(" Y: ");
-    Serial.print(magnetometerValues.y);
-    Serial.print(" Z: ");
-    Serial.println(magnetometerValues.z);
-    Serial.println();
+    updateData(String(altimeterValues.altitude) + " " + String(altimeterValues.pressure) + " " + String(altimeterValues.humidity) + " " + String(altimeterValues.temperature) + " " + String(accelerometerValues.accelerationX) + " " + String(accelerometerValues.accelerationY) + " " + String(accelerometerValues.accelerationZ) + " " + String(accelerometerValues.pitch) + " " + String(accelerometerValues.yaw) + " " + String(accelerometerValues.roll) + " " + String(accelerometerValues.temperature) + " " + String(magnetometerValues.x) + " " + String(magnetometerValues.y) + " " + String(magnetometerValues.z) + "\n");
+    writeToStorage();
 
     delay(5000 - millis() + time);
 }

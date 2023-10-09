@@ -8,7 +8,7 @@ String currentData = "";
 File file;
 
 void initStorage() {
-    if (!SD.begin(4)) {
+    if(!SD.begin(4)) {
         Serial.println("SD Storage initialization failed");
         while(1) {
             delay(100);

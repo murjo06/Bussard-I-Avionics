@@ -32,8 +32,8 @@ struct accelerometerData getAccelerometerData() {
     struct accelerometerData data;
 	sensors_event_t a, g, temp;
 	mpu.getEvent(&a, &g, &temp);
-    data.accelerationX = a.acceleration.x - 10.18;
-    data.accelerationY = a.acceleration.y + 0.44;
+    data.accelerationX = a.acceleration.x - 10.22;
+    data.accelerationY = a.acceleration.y + 0.21;
     data.accelerationZ = a.acceleration.z - 3.2;
     data.yaw = g.gyro.x + 0.02;
     data.pitch = g.gyro.y;
